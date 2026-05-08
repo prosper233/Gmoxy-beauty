@@ -407,9 +407,13 @@ export default function GmoxyBeautyWebsite() {
                   <h3 className="text-2xl font-black mb-3">{product.name}</h3>
                   <div className="flex items-center justify-between">
                     <p className="text-pink-600 text-3xl font-black">{product.price}</p>
-                    <button className="bg-pink-600 text-white px-5 py-3 rounded-xl font-bold hover:bg-pink-700 transition">
+                    <a
+                      href={`https://wa.me/2349021947521?text=I want to buy ${product.name}`}
+                      target="_blank"
+                      className="bg-pink-600 text-white px-5 py-3 rounded-xl font-bold hover:bg-pink-700 transition inline-block text-center"
+                    >
                       Buy
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -469,7 +473,7 @@ export default function GmoxyBeautyWebsite() {
           review: "Absolutely amazing quality. My skin glows beautifully!",
         },
         {
-          name: "Chisom Okafor",
+          name: "Onyebuchi Kosiso",
           review: "Best beauty brand I have purchased from in Lagos.",
         },
         {
