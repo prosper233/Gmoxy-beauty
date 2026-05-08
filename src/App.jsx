@@ -9,8 +9,268 @@ import bismidkoji from './assets/bismidkoji.jpeg'
 import Aveeno from './assets/Aveeno.jpeg'
 import profile from './assets/profile.jpeg'
 import active from './assets/active.jpeg'
+import img31k from './assets/new/31k.jpeg'
+import anua from './assets/new/anua.jpeg'
+import april from './assets/new/april.jpeg'
+import aqua from './assets/new/aqua.jpeg'
+import arden from './assets/new/arden.jpeg'
+import carrot from './assets/new/carrot.jpeg'
+import cerave from './assets/new/cerave.jpeg'
+import cloud9 from './assets/new/cloud9.jpeg'
+import corx from './assets/new/corx.jpeg'
+import corxAll from './assets/new/corxall.jpeg'
+import corxDual from './assets/new/corxdual.jpeg'
+import corxSnail from './assets/new/corxsnail.jpeg'
+import dove from './assets/new/dove.jpeg'
+import imgE45 from './assets/new/E45.jpeg'
+import eos from './assets/new/eos.jpeg'
+import faster from './assets/new/faster.jpeg'
+import gluthatione from './assets/new/gluthatione.jpeg'
+import koji from './assets/new/koji.jpeg'
+import kojiWhite from './assets/new/kojiwhite.jpeg'
+import maryMay from './assets/new/mary&may.jpeg'
+import medix from './assets/new/medix.jpeg'
+import naturium from './assets/new/naturium.jpeg'
+import naturiumRestoring from './assets/new/naturiumrestoring.jpeg'
+import niacinamide from './assets/new/niacinamide.jpeg'
+import nivea from './assets/new/nivea.jpeg'
+import nui from './assets/new/nui.jpeg'
+import olaySuper from './assets/new/olaysuper.jpeg'
+import ordinary from './assets/new/ordinary.jpeg'
+import pro from './assets/new/pro.jpeg'
+import prolab from './assets/new/prolab.jpeg'
+import skeenpoint from './assets/new/skeenpoint.jpeg'
+import snapchat from './assets/new/snapchat.jpeg'
+import timeless from './assets/new/timeless.jpeg'
+import vsp from './assets/new/vsp.jpeg'
+import { useState } from 'react'
+
 
 export default function GmoxyBeautyWebsite() {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const products = [
+    {
+      name: 'Active Carvier oil',
+      price: '₦6,500',
+      image: active,
+    },
+    {
+      name: 'Touch bright and  clear cream',
+      price: '₦25,000',
+      image: touch,
+    },
+    {
+      name: 'Vaseline shimmer oil',
+      price: '₦11,000',
+      image: vaseline,
+    },
+    {
+      name: 'Aveeno body oil',
+      price: '₦17,500',
+      image: Aveeno,
+    },
+    {
+      name: 'Bismid Koji+gluthatione night face cream',
+      price: '₦13,500',
+      image: bismidkoji,
+    },
+    {
+      name: 'Mixsoon bean essence 50ml',
+      price: '₦17,500',
+      image: Mixsoon,
+    },
+    {
+      name: 'Olay vitamine C body wash',
+      price: '₦17,500',
+      image: Olay,
+    },
+    {
+      name: 'OOTD  Brightening vitamin c lotion',
+      price: '₦15,000',
+      image: OOTD,
+    },
+    {
+      name: 'Advanced glow body oil',
+      price: '₦8,500',
+      image: advance,
+    },
+    {
+      name: 'saltair body lotion',
+      price: '₦31,000',
+      image: img31k,
+    },
+    {
+      name: 'Anua azelaic acid serum',
+      price: '₦26,000',
+      image: anua,
+    },
+    {
+      name: 'Apri skin Txa niacinamide deep cleanser ',
+      price: '₦14,500',
+      image: april,
+    },
+    {
+      name: 'Aqua rich body gel wash',
+      price: '₦10,500',
+      image: aqua,
+    },
+    {
+      name: 'Arden kids and teens lotion',
+      price: '₦9,500',
+      image: arden,
+    },
+    {
+      name: 'Carrot',
+      price: '₦10,000',
+      image: carrot,
+    },
+    {
+      name: 'Cerave moisturizing lotion',
+      price: '₦23,000',
+      image: cerave,
+    },
+    {
+      name: 'Cloud 9 lemon body cream',
+      price: '₦14,500',
+      image: cloud9,
+    },
+    {
+      name: 'Corx hyaluronic acid cream',
+      price: '₦18,000',
+      image: corx,
+    },
+    {
+      name: 'Corx all in one moisturizer',
+      price: '₦17,000',
+      image: corxAll,
+    },
+    {
+      name: 'Corx Dual essence',
+      price: '₦25,000',
+      image: corxDual,
+    },
+    {
+      name: 'Corx Snail mucin power essence',
+      price: '₦16,000',
+      image: corxSnail,
+    },
+    {
+      name: 'Dove pink bar',
+      price: '₦6,500',
+      image: dove,
+    },
+    {
+      name: 'E45 body lotion',
+      price: '₦9,500',
+      image: imgE45,
+    },
+    {
+      name: 'Eos vanilla cashmere body wash ',
+      price: '₦25,000',
+      image: eos,
+    },
+    {
+      name: 'Faster white snail lotion',
+      price: '₦16,500',
+      image: faster,
+    },
+    {
+      name: 'Gluthatione vitamin c',
+      price: '₦16,000',
+      image: gluthatione,
+    },
+    {
+      name: 'Koji dark spot serum',
+      price: '₦21,000',
+      image: koji,
+    },
+    {
+      name: 'Koji White radiant correcting cream',
+      price: '₦21,500',
+      image: kojiWhite,
+    },
+    {
+      name: 'Mary & May spicule collagen',
+      price: '₦10,000',
+      image: maryMay,
+    },
+    {
+      name: 'Medix vit c lotion',
+      price: '₦21,000',
+      image: medix,
+    },
+    {
+      name: 'Naturium vitamin c body wash',
+      price: '₦39,000',
+      image: naturium,
+    },
+    {
+      name: 'Naturium Restoring body lotion',
+      price: '₦38,000',
+      image: naturiumRestoring,
+    },
+    {
+      name: ' Olay Niacinamide lotion',
+      price: '₦17,000',
+      image: niacinamide,
+    },
+    {
+      name: 'Nivea sunscreen',
+      price: '₦16,500',
+      image: nivea,
+    },
+    {
+      name: 'Nui skin lotion',
+      price: '₦9,000',
+      image: nui,
+    },
+    {
+      name: 'Olay Super serum body wash',
+      price: '₦24,000',
+      image: olaySuper,
+    },
+    {
+      name: 'The Ordinary, niacinamide 10% + zinc 1%',
+      price: '₦16,500',
+      image: ordinary,
+    },
+    {
+      name: 'Pro lab niacinamide lotion',
+      price: '₦9,500',
+      image: pro,
+    },
+    {
+      name: 'Prolab kojic lotion',
+      price: '₦9,500',
+      image: prolab,
+    },
+    {
+      name: 'Skeenpoint glow booster lighting lotion',
+      price: '₦10,500',
+      image: skeenpoint,
+    },
+    {
+      name: 'Snapchat bath',
+      price: '₦20,000',
+      image: snapchat,
+    },
+    {
+      name: 'Timeless 20% vitamin c serum',
+      price: '₦23,000',
+      image: timeless,
+    },
+    {
+      name: 'Vsp botanics mineral sunscreen',
+      price: '₦13,000',
+      image: vsp,
+    },
+  ];
+
+  const filteredProducts = products.filter(product =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="min-h-screen bg-[#fff8f8] text-gray-900 font-sans">
       {/* HERO SECTION */}
@@ -120,65 +380,17 @@ export default function GmoxyBeautyWebsite() {
               Carefully selected beauty essentials designed for elegance, confidence,
               and luxury.
             </p>
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full max-w-md mx-auto px-4 py-3 rounded-2xl border border-pink-200 focus:border-pink-500 outline-none mb-8 block"
+            />
           </div>
 
           <div className="grid md:grid-cols-3 gap-10">
-            {[
-              {
-                name: 'Active Carvier oil',
-                price: '₦6,500',
-                image:
-                  active,
-              },
-              {
-                name: 'Touch bright and  clear cream',
-                price: '₦25,000',
-                image:
-                  touch,
-              },
-              {
-                name: 'Vaseline shimmer oil',
-                price: '₦11,000',
-                image:
-                 vaseline,
-              },
-               {
-                name: 'Aveeno body oil',
-                price: '₦17,500',
-                image:
-                 Aveeno,
-              },
-               {
-                name: 'Bismid Koji+gluthatione night face cream',
-                price: '₦13,500',
-                image:
-                 bismidkoji,
-              },
-               {
-                name: 'Mixsoon bean essence 50ml',
-                price: '₦17,500',
-                image:
-                 Mixsoon,
-              },
-               {
-                name: 'Olay vitamine C body wash',
-                price: '₦17,500',
-                image:
-                 Olay,
-              },
-               {
-                name: 'OOTD  Brightening vitamin c lotion',
-                price: '₦15,000',
-                image:
-                 OOTD,
-              },
-               {
-                name: 'Advanced glow body oil',
-                price: '₦8,500',
-                image:
-                 advance,
-              },
-            ].map((product, i) => (
+            {filteredProducts.map((product, i) => (
               <div
                 key={i}
                 className="group bg-white rounded-[35px] overflow-hidden shadow-xl hover:-translate-y-3 transition duration-300"
