@@ -48,6 +48,54 @@ import { useState } from 'react'
 
 export default function GmoxyBeautyWebsite() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [cart, setCart] = useState([]);
+  const [showCart, setShowCart] = useState(false);
+
+  const addToCart = (product) => {
+    const existingItem = cart.find(item => item.name === product.name);
+    if (existingItem) {
+      setCart(cart.map(item =>
+        item.name === product.name
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      ));
+    } else {
+      setCart([...cart, { ...product, quantity: 1 }]);
+    }
+  };
+
+  const removeFromCart = (index) => {
+    setCart(cart.filter((_, i) => i !== index));
+  };
+
+  const updateQuantity = (index, quantity) => {
+    if (quantity <= 0) {
+      removeFromCart(index);
+    } else {
+      setCart(cart.map((item, i) =>
+        i === index ? { ...item, quantity } : item
+      ));
+    }
+  };
+
+  const clearCart = () => {
+    setCart([]);
+  };
+
+  const getTotalItems = () => {
+    return cart.reduce((total, item) => total + item.quantity, 0);
+  };
+
+  const getTotalPrice = () => {
+    return cart.reduce((total, item) => total + (parseFloat(item.price.replace('₦', '').replace(',', '')) * item.quantity), 0);
+  };
+
+  const checkout = () => {
+    const cartItems = cart.map(item => `${item.name} (x${item.quantity})`).join(', ');
+    const message = `I want to buy: ${cartItems}`;
+    const whatsappUrl = `https://wa.me/2349021947521?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
 
   const products = [
     {
@@ -343,9 +391,25 @@ export default function GmoxyBeautyWebsite() {
           <a href="#contact" className="hover:text-pink-600">Contact</a>
         </div>
 
-        <button className="bg-pink-600 text-white px-6 py-3 rounded-xl font-bold shadow-lg hover:bg-pink-700 transition">
-          Shop Now
-        </button>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => setShowCart(true)}
+            className="relative bg-pink-100 text-pink-600 p-3 rounded-xl hover:bg-pink-200 transition"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5H19M7 13l-1.1 5M7 13h10m0 0v8a2 2 0 01-2 2H9a2 2 0 01-2-2v-8z" />
+            </svg>
+            {getTotalItems() > 0 && (
+              <span className="absolute -top-2 -right-2 bg-pink-600 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center font-bold">
+                {getTotalItems()}
+              </span>
+            )}
+          </button>
+
+          <button className="bg-pink-600 text-white px-6 py-3 rounded-xl font-bold shadow-lg hover:bg-pink-700 transition">
+            Shop Now
+          </button>
+        </div>
       </nav>
 
       {/* FEATURE SECTION */}
@@ -405,16 +469,22 @@ export default function GmoxyBeautyWebsite() {
 
                 <div className="p-8">
                   <h3 className="text-2xl font-black mb-3">{product.name}</h3>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between mb-4">
                     <p className="text-pink-600 text-3xl font-black">{product.price}</p>
-                    <a
-                      href={`https://wa.me/2349021947521?text=I want to buy ${product.name}`}
-                      target="_blank"
-                      className="bg-pink-600 text-white px-5 py-3 rounded-xl font-bold hover:bg-pink-700 transition inline-block text-center"
+                    <button
+                      onClick={() => addToCart(product)}
+                      className="bg-pink-100 text-pink-600 px-4 py-2 rounded-xl font-bold hover:bg-pink-200 transition"
                     >
-                      Buy
-                    </a>
+                      Add to Cart
+                    </button>
                   </div>
+                  <a
+                    href={`https://wa.me/2349021947521?text=I want to buy ${product.name}`}
+                    target="_blank"
+                    className="bg-pink-600 text-white px-5 py-3 rounded-xl font-bold hover:bg-pink-700 transition inline-block text-center w-full"
+                  >
+                    Buy Now
+                  </a>
                 </div>
               </div>
             ))}
@@ -584,6 +654,96 @@ export default function GmoxyBeautyWebsite() {
           </div>
         </div>
       </footer>
+
+      {/* CART MODAL */}
+      {showCart && (
+        <div className="fixed inset-0 z-50 flex">
+          <div
+            className="absolute inset-0 bg-black bg-opacity-50"
+            onClick={() => setShowCart(false)}
+          ></div>
+          <div className="relative ml-auto w-full max-w-md bg-white h-full shadow-2xl">
+            <div className="flex items-center justify-between p-6 border-b">
+              <h2 className="text-2xl font-black text-pink-600">Shopping Cart</h2>
+              <button
+                onClick={() => setShowCart(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-6">
+              {cart.length === 0 ? (
+                <p className="text-center text-gray-500 py-8">Your cart is empty</p>
+              ) : (
+                <div className="space-y-4">
+                  {cart.map((item, index) => (
+                    <div key={index} className="flex items-center gap-4 bg-pink-50 p-4 rounded-2xl">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-16 h-16 object-cover rounded-xl"
+                      />
+                      <div className="flex-1">
+                        <h3 className="font-bold text-sm">{item.name}</h3>
+                        <p className="text-pink-600 font-black">{item.price}</p>
+                        <div className="flex items-center gap-2 mt-2">
+                          <button
+                            onClick={() => updateQuantity(index, item.quantity - 1)}
+                            className="w-8 h-8 bg-pink-200 text-pink-600 rounded-full flex items-center justify-center font-bold hover:bg-pink-300"
+                          >
+                            -
+                          </button>
+                          <span className="font-bold">{item.quantity}</span>
+                          <button
+                            onClick={() => updateQuantity(index, item.quantity + 1)}
+                            className="w-8 h-8 bg-pink-200 text-pink-600 rounded-full flex items-center justify-center font-bold hover:bg-pink-300"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => removeFromCart(index)}
+                        className="text-red-500 hover:text-red-700"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {cart.length > 0 && (
+              <div className="border-t p-6 space-y-4">
+                <div className="flex justify-between items-center">
+                  <span className="font-bold text-lg">Total: ₦{getTotalPrice().toLocaleString()}</span>
+                </div>
+                <div className="flex gap-3">
+                  <button
+                    onClick={clearCart}
+                    className="flex-1 bg-gray-200 text-gray-700 py-3 rounded-xl font-bold hover:bg-gray-300 transition"
+                  >
+                    Clear Cart
+                  </button>
+                  <button
+                    onClick={checkout}
+                    className="flex-1 bg-pink-600 text-white py-3 rounded-xl font-bold hover:bg-pink-700 transition"
+                  >
+                    Checkout
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
