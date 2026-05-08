@@ -8,6 +8,7 @@ import Glamoflx from './assets/Glamoflx.jpeg'
 import bismidkoji from './assets/bismidkoji.jpeg'
 import Aveeno from './assets/Aveeno.jpeg'
 import profile from './assets/profile.jpeg'
+import active from './assets/active.jpeg'
 
 export default function GmoxyBeautyWebsite() {
   return (
@@ -124,10 +125,10 @@ export default function GmoxyBeautyWebsite() {
           <div className="grid md:grid-cols-3 gap-10">
             {[
               {
-                name: 'Radiance Foundation',
-                price: '₦18,500',
+                name: 'Active Carvier oil',
+                price: '₦6,500',
                 image:
-                  Glamoflx,
+                  active,
               },
               {
                 name: 'Touch bright and  clear cream',
@@ -241,29 +242,40 @@ export default function GmoxyBeautyWebsite() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section id="testimonials" className="py-24 px-6 md:px-16 bg-[#fff3f6]">
-        <div className="max-w-7xl mx-auto text-center">
-          <p className="uppercase tracking-widest text-pink-600 font-bold mb-3">
-            Testimonials
+<section id="testimonials" className="py-24 px-6 md:px-16 bg-[#fff3f6]">
+  <div className="max-w-7xl mx-auto text-center">
+    <p className="uppercase tracking-widest text-pink-600 font-bold mb-3">
+      Testimonials
+    </p>
+
+    <h2 className="text-5xl font-black mb-16">What Customers Say</h2>
+
+    <div className="grid md:grid-cols-3 gap-8">
+      {[
+        {
+          name: "Amina Bello",
+          review: "Absolutely amazing quality. My skin glows beautifully!",
+        },
+        {
+          name: "Chisom Okafor",
+          review: "Best beauty brand I have purchased from in Lagos.",
+        },
+        {
+          name: "Amaechi prosper ",
+          review: "Luxury feel and affordable prices. Highly recommended!",
+        },
+      ].map((item, i) => (
+        <div key={i} className="bg-white p-10 rounded-[35px] shadow-xl">
+          <div className="text-5xl mb-5">💖</div>
+          <p className="text-gray-700 text-lg leading-relaxed mb-6">
+            “{item.review}”
           </p>
-
-          <h2 className="text-5xl font-black mb-16">What Customers Say</h2>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              'Absolutely amazing quality. My skin glows beautifully!',
-              'Best beauty brand I have purchased from in Lagos.',
-              'Luxury feel and affordable prices. Highly recommended!',
-            ].map((review, i) => (
-              <div key={i} className="bg-white p-10 rounded-[35px] shadow-xl">
-                <div className="text-5xl mb-5">💖</div>
-                <p className="text-gray-700 text-lg leading-relaxed mb-6">“{review}”</p>
-                <h4 className="font-black text-xl">Verified Customer</h4>
-              </div>
-            ))}
-          </div>
+          <h4 className="font-black text-xl">{item.name}</h4>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* NEWSLETTER */}
       <section className="py-24 px-6 md:px-16 bg-gradient-to-r from-pink-600 to-rose-500 text-white text-center">
